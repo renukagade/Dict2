@@ -132,7 +132,7 @@ if st.button("Use Voice Input") and not st.session_state["webrtc_initialized"]:
     st.session_state["webrtc_initialized"] = True
     st.session_state["start_time"] = time.time()  # Start time for capture
     webrtc_ctx = webrtc_streamer(
-        st.write("hello")
+        st.write("hello");
         key="speech-to-text",
         mode=WebRtcMode.SENDRECV,
         client_settings=ClientSettings(
