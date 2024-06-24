@@ -101,7 +101,12 @@ if st.button("Use Voice Input") and not st.session_state["webrtc_initialized"]:
         key="speech-to-text",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration={
-            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}],
+            "iceTransportPolicy": "all",
+             "bundlePolicy": "balanced",
+             "rtcpMuxPolicy": "require",
+             "iceCandidatePoolSize": 10  # Increase pool size for more robust candidate gathering
+         
         },
         media_stream_constraints={
             "video": False,
