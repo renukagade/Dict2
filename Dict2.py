@@ -97,10 +97,14 @@ if st.button("Use Voice Input"):
     webrtc_ctx = webrtc_streamer(
         key="speech-to-text",
         mode=WebRtcMode.SENDRECV,
-        client_settings=ClientSettings(
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-            media_stream_constraints={"video": False, "audio": True},
-        ),
+        rtc_configuration={
+            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+        },
+        media_stream_constraints={
+            "video": False,
+            "audio": True
+        },
+        
         audio_processor_factory=AudioProcessor,
     )
 
