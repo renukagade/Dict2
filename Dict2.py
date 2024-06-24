@@ -146,14 +146,7 @@ if st.session_state["webrtc_initialized"]:
     st.write("Listening...")
     if st.session_state["transcription"]:
         st.write("You said: ", st.session_state["transcription"])
-
-    if webrtc_ctx.state.playing:
-        if len(webrtc_ctx.audio_processor.frames) > 0:
-            st.write("Processing audio...")
-            audio_frames = webrtc_ctx.audio_processor.frames
-            audio_bytes = b"".join([frame.planes[0].to_bytes() for frame in audio_frames])
-            word = recognize_speech(audio_bytes)
-
+        
 if word:
     word_data = get_word_data(word)
     if word_data:
