@@ -3,7 +3,7 @@ import requests
 import speech_recognition as sr
 import pyttsx3
 from googletrans import Translator
-from streamlit_webrtc import webrtc_streamer, WebRtcMode, ClientSettings
+from streamlit_webrtc import webrtc_streamer, WebRtcMode
 import av
 
 BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
