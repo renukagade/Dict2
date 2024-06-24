@@ -95,7 +95,8 @@ st.write("Enter a word or use voice input to get its meaning.")
 
 word = st.text_input("Enter a word:")
 
-if st.button("Use Voice Input"):
+if st.button("Use Voice Input") and not st.session_state["webrtc_initialized"]:
+    st.session_state["webrtc_initialized"] = True
     webrtc_ctx = webrtc_streamer(
         key="speech-to-text",
         mode=WebRtcMode.SENDRECV,
