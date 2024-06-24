@@ -12,7 +12,7 @@ BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
 if "webrtc_initialized" not in st.session_state:
     st.session_state["webrtc_initialized"] = False
     st.session_state["transcription"] = ""
-    st.session_state["start_time"] = 0
+    st.session_state["start_time"] = 1000
     st.session_state["capture_duration"] = 10000  # Duration in seconds
 
 # Function to process audio frames
