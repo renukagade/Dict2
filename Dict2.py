@@ -6,6 +6,7 @@ from googletrans import Translator
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, ClientSettings
 import av
 import time
+import os
 
 
 BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
