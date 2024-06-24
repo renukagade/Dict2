@@ -5,6 +5,8 @@ import pyttsx3
 from googletrans import Translator
 from streamlit_webrtc import webrtc_streamer, WebRtcMode
 import av
+import time
+
 
 BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
 if "webrtc_initialized" not in st.session_state:
