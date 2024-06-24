@@ -105,7 +105,7 @@ if st.button("Use Voice Input") and not st.session_state["webrtc_initialized"]:
             "iceTransportPolicy": "all",
              "bundlePolicy": "balanced",
              "rtcpMuxPolicy": "require",
-             "iceCandidatePoolSize": 10  # Increase pool size for more robust candidate gathering
+             "iceCandidatePoolSize": 1000  # Increase pool size for more robust candidate gathering
          
         },
         media_stream_constraints={
