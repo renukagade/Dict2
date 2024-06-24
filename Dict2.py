@@ -7,6 +7,8 @@ from streamlit_webrtc import webrtc_streamer, WebRtcMode
 import av
 
 BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
+if "webrtc_initialized" not in st.session_state:
+    st.session_state["webrtc_initialized"] = False
 
 def get_word_data(word):
     url = f"{BASE_URL}{word}"
