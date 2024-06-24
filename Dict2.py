@@ -133,7 +133,7 @@ if st.button("Use Voice Input") and not st.session_state["webrtc_initialized"]:
     st.session_state["start_time"] = time.time()  # Start time for capture
     st.write("hello");
     webrtc_ctx = webrtc_streamer(
-        key="speech-to-text",
+        #key="speech-to-text",
         #mode=WebRtcMode.SENDRECV,
         client_settings=ClientSettings(
             rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
