@@ -9,39 +9,7 @@ import time
 
 
 BASE_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
-if "webrtc_initialized" not in st.session_state:
-    st.session_state["webrtc_initialized"] = False
-    st.session_state["transcription"] = ""
-    st.session_state["start_time"] = 1000
-    st.session_state["capture_duration"] = 10000  # Duration in seconds
 
-# Function to process audio frames
-def audio_processor_factory():
-    recognizer = sr.Recognizer()
-
-    def process_audio(frame: av.AudioFrame):
-        current_time = time.time()
-        if current_time - st.session_state["start_time"] > st.session_state["capture_duration"]:
-            st.session_state["webrtc_initialized"] = False
-            webrtc_ctx.stop()
-            return
-
-        audio = frame.to_ndarray()
-        audio = audio.mean(axis=1)  # Convert stereo to mono
-        sample_rate = frame.sample_rate
-
-        # Convert numpy array to AudioData
-        audio_data = sr.AudioData(audio.tobytes(), sample_rate, frame.format.bits_per_sample // 8)
-
-        try:
-            text = recognizer.recognize_google(audio_data)
-            st.session_state["transcription"] = text
-        except sr.UnknownValueError:
-            st.session_state["transcription"] = "Could not understand audio"
-        except sr.RequestError as e:
-            st.session_state["transcription"] = f"Could not request results from Google Speech Recognition service; {e}"
-
-    return process_audio
 def get_word_data(word):
     url = f"{BASE_URL}{word}"
     response = requests.get(url)
@@ -128,25 +96,6 @@ st.write("Enter a word or use voice input to get its meaning.")
 word = st.text_input("Enter a word:")
 
 # Streamlit interface
-if st.button("Use Voice Input") and not st.session_state["webrtc_initialized"]:
-    st.session_state["webrtc_initialized"] = True
-    st.session_state["start_time"] = time.time()  # Start time for capture
-    st.write("hello");
-    st.session_state["webrtc_ctx"] = webrtc_streamer(
-        key="speech-to-text",
-        mode=WebRtcMode.SENDRECV,
-        client_settings=ClientSettings(
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-            media_stream_constraints={"video": False, "audio": True},
-        ),
-        audio_processor_factory=audio_processor_factory,
-    )
-
-# Display the transcription if available
-if st.session_state["webrtc_initialized"]:
-    st.write("Listening...")
-    if st.session_state["transcription"]:
-        st.write("You said: ", st.session_state["transcription"])
         
 if word:
     word_data = get_word_data(word)
